@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './add-task.styles.css'
 
 const AddTask = (props) => {
 
@@ -36,6 +37,7 @@ const AddTask = (props) => {
             const responseObj = await response.json();
             const task = responseObj.data;
             setAllTasks([...allTasks, task])
+            setInput("")
             alert(responseObj.message)
 
         } catch (err) {
@@ -44,12 +46,11 @@ const AddTask = (props) => {
     };
 
     return (
-        <div className="add-tasks-form">
-
+        <div className="add-task">
             <h1>Add a new task</h1>
-            <div>
+            <div className="task-group">
                 <input type="text" onInput={handleInput} />
-                <button type="submit" disabled={isInputLong || !isInputValid} onClick={handleSubmit}>Add</button>
+                <button type="submit" className="add-task-btn" disabled={isInputLong || !isInputValid} onClick={handleSubmit}>Add</button>
             </div>
 
             {!isInputValid && <div >You must add a task</div>}
